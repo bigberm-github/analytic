@@ -23,15 +23,14 @@ copies or substantial portions of the Software. -->
   </style>
 </head>
 <body>
-  <h2>ESP Weather Station</h2>
+  <h2>ตรวจสอบอุณหภูมิและความชื้นในดินทุกๆ 30 วินาที</h2>
   <div id="chart-temperature" class="container"></div>
-  <div id="chart-humidity" class="container"></div>
-  <div id="chart-pressure" class="container"></div>
+  <div id="chart-humidity" class="container"></div> 
 </body>
 <script>
 var chartT = new Highcharts.Chart({
   chart:{ renderTo : 'chart-temperature' },
-  title: { text: 'BME280 Temperature' },
+  title: { text: 'อุณหภูมิ' },
   series: [{
     showInLegend: false,
     data: []
@@ -46,7 +45,7 @@ var chartT = new Highcharts.Chart({
     dateTimeLabelFormats: { second: '%H:%M:%S' }
   },
   yAxis: {
-    title: { text: 'Temperature (Celsius)' }
+    title: { text: 'อุณหภูมิ (Celsius)' }
     //title: { text: 'Temperature (Fahrenheit)' }
   },
   credits: { enabled: false }
@@ -71,7 +70,7 @@ setInterval(function ( ) {
 
 var chartH = new Highcharts.Chart({
   chart:{ renderTo:'chart-humidity' },
-  title: { text: 'BME280 Humidity' },
+  title: { text: 'ความชื้น' },
   series: [{
     showInLegend: false,
     data: []
@@ -86,7 +85,7 @@ var chartH = new Highcharts.Chart({
     dateTimeLabelFormats: { second: '%H:%M:%S' }
   },
   yAxis: {
-    title: { text: 'Humidity (%)' }
+    title: { text: 'ความชื้น (%)' }
   },
   credits: { enabled: false }
 });
@@ -107,7 +106,7 @@ setInterval(function ( ) {
   xhttp.open("GET", "/humidity", true);
   xhttp.send();
 }, 30000 ) ;
-
+/*
 var chartP = new Highcharts.Chart({
   chart:{ renderTo:'chart-pressure' },
   title: { text: 'BME280 Pressure' },
@@ -147,5 +146,6 @@ setInterval(function ( ) {
   xhttp.open("GET", "/pressure", true);
   xhttp.send();
 }, 30000 ) ;
+*/
 </script>
 </html>
