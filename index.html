@@ -23,7 +23,8 @@ Highcharts.setOptions({
         useUTC: false
     }
 });
-Highcharts.chart('container', {
+(function() {
+   Highcharts.chart('container', {
 
     title: {
         text: 'Highcharts data from Google Spreadsheets'
@@ -35,8 +36,16 @@ Highcharts.chart('container', {
 	enablePolling: true,
         dataRefreshRate: 10,
 	error: console.error
-    }
-  
+    }  
+  });
+	setInterval(function() {
+        	var chart = ('container').highcharts();
+          (function() {
+	      chart.options.data.googleAPIKey = 'AIzaSyA7gCpr2L3_uWfZDgkO8Kv_bjiUg3xDeKI',			  
+              chart.options.data.googleSpreadsheetKey = '1D8ZYtc-uMX4vo_ToeJuE79qn7R1WVVHhuFXDmyLTSxY',
+              chart.updateFromData();
+          });
+        }, 5000);
 });
 </script>
 </html>
