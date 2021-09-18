@@ -47,5 +47,23 @@ Highcharts.setOptions({
           });
         }, 5000);
 });
+Highcharts.Chart.prototype.updateFromData = function()
+{
+    var chart = this;
+    if (chart.options.data.googleSpreadsheetKey)
+    {
+      Highcharts.data({
+          googleSpreadsheetKey: chart.options.data.googleSpreadsheetKey,
+          afterComplete: function(dataOptions) {
+            Highcharts.each(dataOptions.series, function(series, i) {
+              chart.series[i].setData(series.data, false);
+            });
+            chart.redraw();
+          }
+        },
+        this.options);
+    }
+};
+
 </script>
 </html>
