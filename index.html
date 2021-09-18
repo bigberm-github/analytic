@@ -18,6 +18,11 @@
 <div id="container"></div>
 </body>
 <script>
+Highcharts.setOptions({
+    global: {
+        useUTC: false
+    }
+});
 Highcharts.chart('container', {
 
     title: {
