@@ -23,7 +23,7 @@ Highcharts.setOptions({
         useUTC: false
     }
 });
-(function() {
+
    Highcharts.chart('container', {
 
     title: {
@@ -38,32 +38,6 @@ Highcharts.setOptions({
 	error: console.error
     }  
   });
-	setInterval(function() {
-        	var chart = ('container').highcharts();
-          (function() {
-	      chart.options.data.googleAPIKey = 'AIzaSyA7gCpr2L3_uWfZDgkO8Kv_bjiUg3xDeKI',			  
-              chart.options.data.googleSpreadsheetKey = '1D8ZYtc-uMX4vo_ToeJuE79qn7R1WVVHhuFXDmyLTSxY',
-              chart.updateFromData();
-          });
-        }, 5000);
-});
-Highcharts.Chart.prototype.updateFromData = function()
-{
-    var chart = this;
-    if (chart.options.data.googleSpreadsheetKey)
-    {
-      Highcharts.data({
-          googleSpreadsheetKey: chart.options.data.googleSpreadsheetKey,
-          afterComplete: function(dataOptions) {
-            Highcharts.each(dataOptions.series, function(series, i) {
-              chart.series[i].setData(series.data, false);
-            });
-            chart.redraw();
-          }
-        },
-        this.options);
-    }
-};
 
 </script>
 </html>
