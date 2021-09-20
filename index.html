@@ -69,9 +69,7 @@ var chartT = new Highcharts.Chart({
   title: { text: 'อุณหภูมิ' },
   series: [{
     showInLegend: false,
-    data: [{
-      enablePolling: true,
-        dataRefreshRate: 2}]
+    data: []
   }],
   plotOptions: {
     line: { animation: false,
@@ -94,9 +92,7 @@ var chartH = new Highcharts.Chart({
   title: { text: 'ความชื้น' },
   series: [{
     showInLegend: false,
-    data:[{
-      enablePolling: true,
-        dataRefreshRate: 2}]
+    data:[]
   }],
   plotOptions: {
     line: { animation: false,
