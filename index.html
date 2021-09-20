@@ -113,7 +113,7 @@ setInterval(function ( ) {
   };
   xmlhttp2.open("GET",url,true);
   xmlhttp2.send(null);
-  delete xmlhttp2;
+  xmlhttp2=null;
 
 }, 10000 ) ;
 
@@ -160,7 +160,7 @@ setInterval(function ( ) {
   };
   xmlhttp3.open("GET",url,true);
   xmlhttp3.send(null);
-  delete xmlhttp3;
+  xmlhttp3=null;
 }, 10000 ) ;
 
 </script>
