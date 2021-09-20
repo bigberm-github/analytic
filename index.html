@@ -41,12 +41,8 @@ copies or substantial portions of the Software. -->
     <div id="chart-humidity" class="container"></div>
 </body>
 <script>
-var humid;
-var temp;
-var url;
-
 function loadData() {
-  url="https://docs.google.com/spreadsheets/d/e/2PACX-1vT9vt0IBAkyuTBpOxWrUaHru2JvwkthSuZaYRPMFHoliPgLGS0m5qQ2m5-EuMKAbWr2Y2MUJZg_JlX-/pub?output=csv";
+  var url="https://docs.google.com/spreadsheets/d/e/2PACX-1vT9vt0IBAkyuTBpOxWrUaHru2JvwkthSuZaYRPMFHoliPgLGS0m5qQ2m5-EuMKAbWr2Y2MUJZg_JlX-/pub?output=csv";
   xmlhttp1=new XMLHttpRequest();
   xmlhttp1.onreadystatechange = function() {
     if(xmlhttp1.readyState == 4 && xmlhttp1.status==200){
@@ -91,15 +87,16 @@ var chartT = new Highcharts.Chart({
 });
 
 setInterval(function ( ) {
-  url="https://docs.google.com/spreadsheets/d/e/2PACX-1vT9vt0IBAkyuTBpOxWrUaHru2JvwkthSuZaYRPMFHoliPgLGS0m5qQ2m5-EuMKAbWr2Y2MUJZg_JlX-/pub?output=csv";
+  var Temp;
+  var url="https://docs.google.com/spreadsheets/d/e/2PACX-1vT9vt0IBAkyuTBpOxWrUaHru2JvwkthSuZaYRPMFHoliPgLGS0m5qQ2m5-EuMKAbWr2Y2MUJZg_JlX-/pub?output=csv";
   xmlhttp2=new XMLHttpRequest();
   xmlhttp2.onreadystatechange = function() {
     if(xmlhttp2.readyState == 4 && xmlhttp2.status==200){
-          var str = xmlhttp2.responseText.split(',');
-          //humid = str[0];
-          temp = str[1];
+          var str = xmlhttp2.responseText;
+          var str_split = str.split(',');
+          Temp = str_split[1];
           var x = (new Date()).getTime(),
-          y = parseFloat(temp);
+          y = parseFloat(Temp);
       	 //console.log(xmlhttp2.responseText);
             
       if(chartT.series[0].data.length > 40) {
@@ -108,7 +105,11 @@ setInterval(function ( ) {
         chartT.series[0].addPoint([x, y], true, false, true);
       }
       str = null;
-      temp = null;
+      str_split = null;
+      Temp = null;
+      delete str;
+      delete str_split;
+      delete Temp;
     }
   };
   xmlhttp2.open("GET",url,true);
@@ -138,14 +139,16 @@ var chartH = new Highcharts.Chart({
 });
 
 setInterval(function ( ) {
-  url="https://docs.google.com/spreadsheets/d/e/2PACX-1vT9vt0IBAkyuTBpOxWrUaHru2JvwkthSuZaYRPMFHoliPgLGS0m5qQ2m5-EuMKAbWr2Y2MUJZg_JlX-/pub?output=csv";
+  var Humid;
+  var url="https://docs.google.com/spreadsheets/d/e/2PACX-1vT9vt0IBAkyuTBpOxWrUaHru2JvwkthSuZaYRPMFHoliPgLGS0m5qQ2m5-EuMKAbWr2Y2MUJZg_JlX-/pub?output=csv";
   xmlhttp3=new XMLHttpRequest();
   xmlhttp3.onreadystatechange = function() {
     if(xmlhttp3.readyState == 4 && xmlhttp3.status==200){
-      var str = xmlhttp3.responseText.split(',');
-      humid = str[0];
+      var str = xmlhttp3.responseText;
+      var str_split = str.split(',');
+      Humid = str[0];
       var x = (new Date()).getTime(),
-          y = parseFloat(humid);
+          y = parseFloat(Humid);
       //console.log(this.responseText);
       if(chartH.series[0].data.length > 40) {
         chartH.series[0].addPoint([x, y], true, true, true);
@@ -153,7 +156,11 @@ setInterval(function ( ) {
         chartH.series[0].addPoint([x, y], true, false, true);
       }
       str = null;
-      humid = null;
+      str_split = null;
+      Humid = null;
+      delete str;
+      delete str_split;
+      delete Humid;
     }
   };
   xmlhttp3.open("GET",url,true);
