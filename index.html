@@ -68,7 +68,8 @@ var chartT = new Highcharts.Chart({
   title: { text: 'อุณหภูมิ' },
   series: [{
     showInLegend: false,
-    data: []
+    data: [{enablePolling: true,
+        dataRefreshRate: 2}]
   }],
   plotOptions: {
     line: { animation: false,
@@ -80,7 +81,7 @@ var chartT = new Highcharts.Chart({
       type: 'datetime',
       labels: {
         formatter: function() {
-          return Highcharts.dateFormat('%b/%e/%Y', this.value);
+          return Highcharts.dateFormat('%H:%M:%S', this.value);
         }
       }
     } ,
@@ -96,7 +97,8 @@ var chartH = new Highcharts.Chart({
   title: { text: 'ความชื้น' },
   series: [{
     showInLegend: false,
-    data: []
+    data: [{enablePolling: true,
+        dataRefreshRate: 2}]
   }],
   plotOptions: {
     line: { animation: false,
@@ -107,7 +109,7 @@ var chartH = new Highcharts.Chart({
       type: 'datetime',
       labels: {
         formatter: function() {
-          return Highcharts.dateFormat('%b/%e/%Y', this.value);
+          return Highcharts.dateFormat('%H:%M:%S', this.value);
         }
       }
     },
@@ -121,7 +123,8 @@ setInterval(function ( ) {
   var Temp;
   var Humid;
   var url="https://docs.google.com/spreadsheets/d/e/2PACX-1vT9vt0IBAkyuTBpOxWrUaHru2JvwkthSuZaYRPMFHoliPgLGS0m5qQ2m5-EuMKAbWr2Y2MUJZg_JlX-/pub?output=csv";
-  var xmlhttp2=new XMLHttpRequest();
+  var xmlhttp2=null;
+  xmlhttp2=new XMLHttpRequest();
   xmlhttp2.onreadystatechange = function() {
     if(xmlhttp2.readyState == 4 && xmlhttp2.status==200){
           var str = xmlhttp2.responseText;
