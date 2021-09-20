@@ -76,12 +76,14 @@ var chartT = new Highcharts.Chart({
     },
     series: { color: '#059e8a' }
   },
-  xAxis: { type: 'datetime',
-    dateTimeLabelFormats: { second: '%H:%M:%S',
-                          day: '%e. %b',
-                          month: '%b \'%y',
-                          year: '%Y'}
-  },
+  xAxis: {
+      type: 'datetime',
+      labels: {
+        formatter: function() {
+          return Highcharts.dateFormat('%b/%e/%Y', this.value);
+        }
+      }
+    } ,
   yAxis: {
     title: { text: 'อุณหภูมิ (เซลเซียส)' }
     //title: { text: 'Temperature (Fahrenheit)' }
@@ -102,12 +104,13 @@ var chartH = new Highcharts.Chart({
     }
   },
   xAxis: {
-    type: 'datetime',
-    dateTimeLabelFormats: { second: '%H:%M:%S',
-                          day: '%e. %b',
-                          month: '%b \'%y',
-                          year: '%Y'}
-  },
+      type: 'datetime',
+      labels: {
+        formatter: function() {
+          return Highcharts.dateFormat('%b/%e/%Y', this.value);
+        }
+      }
+    },
   yAxis: {
     title: { text: 'ความชื้น (%)' }
   },
