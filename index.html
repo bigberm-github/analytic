@@ -5,6 +5,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files.
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software. -->
+
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -55,6 +56,7 @@ function loadData() {
   xmlhttp1.open("GET",url,true);
   xmlhttp1.send(null);
 }
+
 Highcharts.setOptions({
     global: {
         useUTC: false
@@ -83,6 +85,7 @@ var chartT = new Highcharts.Chart({
   },
   credits: { enabled: false }
 });
+
 var chartH = new Highcharts.Chart({
   chart:{ renderTo:'chart-humidity' },
   title: { text: 'ความชื้น' },
@@ -104,6 +107,7 @@ var chartH = new Highcharts.Chart({
   },
   credits: { enabled: false }
 });
+
 setInterval(function ( ) {
   var Temp;
   var Humid;
@@ -129,7 +133,6 @@ setInterval(function ( ) {
       } else {
         chartH.series[0].addPoint([x, z], true, false, true);
       }
-
       x=null;y=null;z=null;
       str = null;
       str_split = null;
@@ -140,6 +143,7 @@ setInterval(function ( ) {
   xmlhttp2.open("GET",url,true);
   xmlhttp2.send(null);   
 }, 10000 ) ;
+
 //var chartH = new Highcharts.Chart({
 //  chart:{ renderTo:'chart-humidity' },
 //  title: { text: 'ความชื้น' },
@@ -161,6 +165,8 @@ setInterval(function ( ) {
 //  },
 //  credits: { enabled: false }
 //});
+
+
 //setInterval(function ( ) {
 //  var Humid;
 //  var url="https://docs.google.com/spreadsheets/d/e/2PACX-1vT9vt0IBAkyuTBpOxWrUaHru2JvwkthSuZaYRPMFHoliPgLGS0m5qQ2m5-EuMKAbWr2Y2MUJZg_JlX-/pub?output=csv";
@@ -189,5 +195,6 @@ setInterval(function ( ) {
 //  xmlhttp3.open("GET",url,true);
 //  xmlhttp3.send(null);    
 //}, 10000 ) ;
+
 </script>
 </html>
