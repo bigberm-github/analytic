@@ -89,7 +89,7 @@ var chartT = new Highcharts.Chart({
 setInterval(function ( ) {
   var Temp;
   var url="https://docs.google.com/spreadsheets/d/e/2PACX-1vT9vt0IBAkyuTBpOxWrUaHru2JvwkthSuZaYRPMFHoliPgLGS0m5qQ2m5-EuMKAbWr2Y2MUJZg_JlX-/pub?output=csv";
-  xmlhttp2=new XMLHttpRequest();
+  var xmlhttp2=new XMLHttpRequest();
   xmlhttp2.onreadystatechange = function() {
     if(xmlhttp2.readyState == 4 && xmlhttp2.status==200){
           var str = xmlhttp2.responseText;
@@ -114,6 +114,8 @@ setInterval(function ( ) {
   };
   xmlhttp2.open("GET",url,true);
   xmlhttp2.send(null); 
+  xmlhttp2=null;
+  delete xmlhttp2;
 }, 10000 ) ;
 
 var chartH = new Highcharts.Chart({
@@ -141,7 +143,7 @@ var chartH = new Highcharts.Chart({
 setInterval(function ( ) {
   var Humid;
   var url="https://docs.google.com/spreadsheets/d/e/2PACX-1vT9vt0IBAkyuTBpOxWrUaHru2JvwkthSuZaYRPMFHoliPgLGS0m5qQ2m5-EuMKAbWr2Y2MUJZg_JlX-/pub?output=csv";
-  xmlhttp3=new XMLHttpRequest();
+  var xmlhttp3=new XMLHttpRequest();
   xmlhttp3.onreadystatechange = function() {
     if(xmlhttp3.readyState == 4 && xmlhttp3.status==200){
       var str = xmlhttp3.responseText;
@@ -165,6 +167,8 @@ setInterval(function ( ) {
   };
   xmlhttp3.open("GET",url,true);
   xmlhttp3.send(null);  
+  xmlhttp3=null;
+  delete xmlhttp3;
 }, 10000 ) ;
 
 </script>
