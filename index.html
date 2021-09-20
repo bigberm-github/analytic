@@ -77,7 +77,10 @@ var chartT = new Highcharts.Chart({
     series: { color: '#059e8a' }
   },
   xAxis: { type: 'datetime',
-    dateTimeLabelFormats: { second: '%H:%M:%S' }
+    dateTimeLabelFormats: { second: '%H:%M:%S',
+                          day: '%e. %b',
+                          month: '%b \'%y',
+                          year: '%Y'}
   },
   yAxis: {
     title: { text: 'อุณหภูมิ (เซลเซียส)' }
@@ -100,7 +103,10 @@ var chartH = new Highcharts.Chart({
   },
   xAxis: {
     type: 'datetime',
-    dateTimeLabelFormats: { second: '%H:%M:%S' }
+    dateTimeLabelFormats: { second: '%H:%M:%S',
+                          day: '%e. %b',
+                          month: '%b \'%y',
+                          year: '%Y'}
   },
   yAxis: {
     title: { text: 'ความชื้น (%)' }
