@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html>
 <!-- Rui Santos - Complete project details at https://RandomNerdTutorials.com
-
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files.
 The above copyright notice and this permission notice shall be included in all
@@ -92,7 +91,7 @@ var chartH = new Highcharts.Chart({
   title: { text: 'ความชื้น' },
   series: [{
     showInLegend: false,
-    data:[]
+    data: []
   }],
   plotOptions: {
     line: { animation: false,
@@ -113,8 +112,7 @@ setInterval(function ( ) {
   var Temp;
   var Humid;
   var url="https://docs.google.com/spreadsheets/d/e/2PACX-1vT9vt0IBAkyuTBpOxWrUaHru2JvwkthSuZaYRPMFHoliPgLGS0m5qQ2m5-EuMKAbWr2Y2MUJZg_JlX-/pub?output=csv";
-  var xmlhttp2=null;
-  xmlhttp2=new XMLHttpRequest();
+  var xmlhttp2=new XMLHttpRequest();
   xmlhttp2.onreadystatechange = function() {
     if(xmlhttp2.readyState == 4 && xmlhttp2.status==200){
           var str = xmlhttp2.responseText;
