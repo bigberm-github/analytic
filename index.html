@@ -43,7 +43,7 @@ copies or substantial portions of the Software. -->
 <script>
 function loadData() {
   var url="https://docs.google.com/spreadsheets/d/e/2PACX-1vT9vt0IBAkyuTBpOxWrUaHru2JvwkthSuZaYRPMFHoliPgLGS0m5qQ2m5-EuMKAbWr2Y2MUJZg_JlX-/pub?output=csv";
-  xmlhttp1=new XMLHttpRequest();
+  var xmlhttp1=new XMLHttpRequest();
   xmlhttp1.onreadystatechange = function() {
     if(xmlhttp1.readyState == 4 && xmlhttp1.status==200){
       //document.getElementById("display").innerHTML = xmlhttp1.responseText;
@@ -63,6 +63,7 @@ Highcharts.setOptions({
         useUTC: false
     }
 });
+  
 var chartT = new Highcharts.Chart({
   chart:{ renderTo : 'chart-temperature' },
   title: { text: 'อุณหภูมิ' },
@@ -85,38 +86,6 @@ var chartT = new Highcharts.Chart({
   },
   credits: { enabled: false }
 });
-
-setInterval(function ( ) {
-  var Temp;
-  var url="https://docs.google.com/spreadsheets/d/e/2PACX-1vT9vt0IBAkyuTBpOxWrUaHru2JvwkthSuZaYRPMFHoliPgLGS0m5qQ2m5-EuMKAbWr2Y2MUJZg_JlX-/pub?output=csv";
-  var xmlhttp2=new XMLHttpRequest();
-  xmlhttp2.onreadystatechange = function() {
-    if(xmlhttp2.readyState == 4 && xmlhttp2.status==200){
-          var str = xmlhttp2.responseText;
-          var str_split = str.split(',');
-          Temp = str_split[1];
-          var x = (new Date()).getTime(),
-          y = parseFloat(Temp);
-      	 //console.log(xmlhttp2.responseText);
-            
-      if(chartT.series[0].data.length > 40) {
-        chartT.series[0].addPoint([x, y], true, true, true);
-      } else {
-        chartT.series[0].addPoint([x, y], true, false, true);
-      }
-      str = null;
-      str_split = null;
-      Temp = null;
-      delete str;
-      delete str_split;
-      delete Temp;
-    }
-  };
-  xmlhttp2.open("GET",url,true);
-  xmlhttp2.send(null); 
-  xmlhttp2=null;
-  delete xmlhttp2;
-}, 10000 ) ;
 
 var chartH = new Highcharts.Chart({
   chart:{ renderTo:'chart-humidity' },
@@ -141,35 +110,92 @@ var chartH = new Highcharts.Chart({
 });
 
 setInterval(function ( ) {
+  var Temp;
   var Humid;
   var url="https://docs.google.com/spreadsheets/d/e/2PACX-1vT9vt0IBAkyuTBpOxWrUaHru2JvwkthSuZaYRPMFHoliPgLGS0m5qQ2m5-EuMKAbWr2Y2MUJZg_JlX-/pub?output=csv";
-  var xmlhttp3=new XMLHttpRequest();
-  xmlhttp3.onreadystatechange = function() {
-    if(xmlhttp3.readyState == 4 && xmlhttp3.status==200){
-      var str = xmlhttp3.responseText;
-      var str_split = str.split(',');
-      Humid = str[0];
-      var x = (new Date()).getTime(),
-          y = parseFloat(Humid);
-      //console.log(this.responseText);
-      if(chartH.series[0].data.length > 40) {
-        chartH.series[0].addPoint([x, y], true, true, true);
+  var xmlhttp2=new XMLHttpRequest();
+  xmlhttp2.onreadystatechange = function() {
+    if(xmlhttp2.readyState == 4 && xmlhttp2.status==200){
+          var str = xmlhttp2.responseText;
+          var str_split = str.split(',');
+          Humid = str_split[0];
+          Temp = str_split[1];
+          var x = (new Date()).getTime(),
+          y = parseFloat(Temp),z = parseFloat(Humid);
+      	 //console.log(xmlhttp2.responseText);
+            
+      if(chartT.series[0].data.length > 40) {
+        chartT.series[0].addPoint([x, y], true, true, true);
       } else {
-        chartH.series[0].addPoint([x, y], true, false, true);
+        chartT.series[0].addPoint([x, y], true, false, true);
       }
+      if(chartH.series[0].data.length > 40) {
+        chartH.series[0].addPoint([x, z], true, true, true);
+      } else {
+        chartH.series[0].addPoint([x, z], true, false, true);
+      }
+      
       str = null;
       str_split = null;
-      Humid = null;
-      delete str;
-      delete str_split;
-      delete Humid;
+      Temp = null;
+      Humid = null;      
     }
   };
-  xmlhttp3.open("GET",url,true);
-  xmlhttp3.send(null);  
-  xmlhttp3=null;
-  delete xmlhttp3;
+  xmlhttp2.open("GET",url,true);
+  xmlhttp2.send(null);   
 }, 10000 ) ;
+
+//var chartH = new Highcharts.Chart({
+//  chart:{ renderTo:'chart-humidity' },
+//  title: { text: 'ความชื้น' },
+//  series: [{
+//    showInLegend: false,
+//    data: []
+//  }],
+//  plotOptions: {
+//    line: { animation: false,
+//      dataLabels: { enabled: true }
+//    }
+//  },
+//  xAxis: {
+//    type: 'datetime',
+//    dateTimeLabelFormats: { second: '%H:%M:%S' }
+//  },
+//  yAxis: {
+//    title: { text: 'ความชื้น (%)' }
+//  },
+//  credits: { enabled: false }
+//});
+
+
+//setInterval(function ( ) {
+//  var Humid;
+//  var url="https://docs.google.com/spreadsheets/d/e/2PACX-1vT9vt0IBAkyuTBpOxWrUaHru2JvwkthSuZaYRPMFHoliPgLGS0m5qQ2m5-EuMKAbWr2Y2MUJZg_JlX-/pub?output=csv";
+//  var xmlhttp3=new XMLHttpRequest();
+//  xmlhttp3.onreadystatechange = function() {
+//    if(xmlhttp3.readyState == 4 && xmlhttp3.status==200){
+//      var str = xmlhttp3.responseText;
+//      var str_split = str.split(',');
+//      Humid = str[0];
+//      var x = (new Date()).getTime(),
+//          y = parseFloat(Humid);
+      //console.log(this.responseText);
+//      if(chartH.series[0].data.length > 40) {
+//        chartH.series[0].addPoint([x, y], true, true, true);
+//      } else {
+//        chartH.series[0].addPoint([x, y], true, false, true);
+//      }
+//      str = null;
+//      str_split = null;
+//      Humid = null;
+//      delete str;
+//      delete str_split;
+//      delete Humid;
+//    }
+//  };
+//  xmlhttp3.open("GET",url,true);
+//  xmlhttp3.send(null);    
+//}, 10000 ) ;
 
 </script>
 </html>
