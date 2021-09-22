@@ -34,7 +34,7 @@ copies or substantial portions of the Software. -->
     <div id="display1"></div>
     <div id="display2"></div>
     -->
-    <h2>อุณหภูมิและความชื้น</h2>
+    <h2>อุณหภูมิและความชื้นในดิน</h2>
     <h3>อัพเดตเรียลไทม์ทุก 10 วินาที</h3>
     <div id="chart-temperature" class="container"></div>
     <div id="chart-humidity" class="container"></div>
@@ -68,7 +68,8 @@ var chartT = new Highcharts.Chart({
   title: { text: 'อุณหภูมิ' },
   series: [{
     showInLegend: false,
-    data: []
+    data: [{enablePolling: true,
+        dataRefreshRate: 3}]
   }],
   plotOptions: {
     line: { animation: false,
@@ -96,7 +97,8 @@ var chartH = new Highcharts.Chart({
   title: { text: 'ความชื้น' },
   series: [{
     showInLegend: false,
-    data: []
+    data: [{enablePolling: true,
+        dataRefreshRate: 3}]
   }],
   plotOptions: {
     line: { animation: false,
@@ -104,9 +106,13 @@ var chartH = new Highcharts.Chart({
     }
   },
   xAxis: {
-    type: 'datetime',
-    dateTimeLabelFormats: { second: '%H:%M:%S'}
-  },
+      type: 'datetime',
+      labels: {
+        formatter: function() {
+          return Highcharts.dateFormat('%H:%M:%S', this.value);
+        }
+      }
+    } ,
   yAxis: {
     title: { text: 'ความชื้น (%)' }
   },
