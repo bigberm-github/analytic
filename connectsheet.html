@@ -104,13 +104,9 @@ var chartH = new Highcharts.Chart({
     }
   },
   xAxis: {
-      type: 'datetime',
-      labels: {
-        formatter: function() {
-          return Highcharts.dateFormat('%H:%M:%S', this.value);
-        }
-      }
-    } ,
+    type: 'datetime',
+    dateTimeLabelFormats: { second: '%H:%M:%S' }
+  },
   yAxis: {
     title: { text: 'ความชื้น (%)' }
   },
