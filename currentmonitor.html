@@ -1,0 +1,220 @@
+<!DOCTYPE HTML>
+<html>
+<!-- Rui Santos - Complete project details at https://RandomNerdTutorials.com
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software. -->
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <style>
+    body {
+      min-width: 310px;
+    	max-width: 800px;
+    	height: 400px;
+      margin: 0 auto;
+    }
+    h2 {
+      font-family: Arial;
+      font-size: 2.5rem;
+      text-align: center;
+    }
+    h3 {
+      font-family: Arial;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+    <!--
+    <button type="button" onclick="loadData()">Load Spreadsheet Data</button>
+    <div id="display1"></div>
+    <!--<div id="display2"></div>-->
+    -->
+    <h2>แสดงการทำงานของอุปกรณ์</h2>
+    <h3>อัพเดตเรียลไทม์ทุก 10 วินาที</h3>
+    <!--<div id="chart-temperature" class="container"></div>
+    <div id="chart-humidity" class="container"></div>--> 
+    <div id="chart-current" class="container"></div>
+</body>
+<script>
+function loadData() {
+  var url="https://docs.google.com/spreadsheets/d/e/2PACX-1vT_xuM3jkiTgpcmCGqqnIrprKZkWGXAxQjGtvgF_3VtByUhaGgQenXnJj4S5oQAb4uLHvwqD5NQHIu7/pub?output=csv";
+  var xmlhttp1=new XMLHttpRequest();
+  xmlhttp1.onreadystatechange = function() {
+    if(xmlhttp1.readyState == 4 && xmlhttp1.status==200){
+      //document.getElementById("display").innerHTML = xmlhttp1.responseText;
+      //var str = xmlhttp1.responseText.split(',');
+      //humid = str[0];
+      //temp = str[1];
+      var str = xmlhttp1.responseText;
+      current = str;
+      //document.getElementById("display1").innerHTML = humid;
+      //document.getElementById("display2").innerHTML = temp;
+      document.getElementById("display1").innerHTML = current;
+    }
+  };
+  xmlhttp1.open("GET",url,true);
+  xmlhttp1.send(null);
+}
+
+Highcharts.setOptions({
+    global: {
+        useUTC: false
+    }
+});
+  
+var chartT = new Highcharts.Chart({
+  //chart:{ renderTo : 'chart-temperature' },
+  chart:{ renderTo : 'chart-current' },
+  title: { text: 'ค่ากระแสไฟฟ้า' },
+  series: [{
+    showInLegend: false,
+    data: []
+  }],
+  plotOptions: {
+    line: { animation: false,
+      dataLabels: { enabled: true }
+    },
+    series: { color: '#059e8a' }
+  },
+  xAxis: {
+      type: 'datetime',
+      labels: {
+        formatter: function() {
+          return Highcharts.dateFormat('%H:%M:%S', this.value);
+        }
+      }
+    } ,
+  yAxis: {
+    title: { text: 'กระแสไฟฟ้า (mA)' }
+    //title: { text: 'อุณหภูมิ (เซลเซียส)' }
+    //title: { text: 'Temperature (Fahrenheit)' }
+  },
+  credits: { enabled: false }
+});
+
+/*
+var chartH = new Highcharts.Chart({
+  chart:{ renderTo:'chart-humidity' },
+  title: { text: 'ความชื้น' },
+  series: [{
+    showInLegend: false,
+    data: []
+  }],
+  plotOptions: {
+    line: { animation: false,
+      dataLabels: { enabled: true }
+    }
+  },
+  xAxis: {
+    type: 'datetime',
+    dateTimeLabelFormats: { second: '%H:%M:%S' }
+  },
+  yAxis: {
+    title: { text: 'ความชื้น (%)' }
+  },
+  credits: { enabled: false }
+});
+*/
+
+setInterval(function ( ) {
+  var Temp;
+  var Humid;
+  var Current;
+  var url="https://docs.google.com/spreadsheets/d/e/2PACX-1vT_xuM3jkiTgpcmCGqqnIrprKZkWGXAxQjGtvgF_3VtByUhaGgQenXnJj4S5oQAb4uLHvwqD5NQHIu7/pub?output=csv";
+  var xmlhttp2=null;
+  xmlhttp2=new XMLHttpRequest();
+  xmlhttp2.onreadystatechange = function() {
+    if(xmlhttp2.readyState == 4 && xmlhttp2.status==200){
+          var str = xmlhttp2.responseText;
+          //var str_split = str.split(',');
+          //Humid = str_split[0];
+          //Temp = str_split[1];
+	  Current = str;
+          var x = (new Date()).getTime(),
+          //y = parseFloat(Temp),z = parseFloat(Humid);
+          y = parseFloat(Current);
+      	 //console.log(xmlhttp2.responseText);
+            
+      if(chartT.series[0].data.length > 40) {
+        chartT.series[0].addPoint([x, y], true, true, true);
+      } else {
+        chartT.series[0].addPoint([x, y], true, false, true);
+      }
+      /*
+      if(chartH.series[0].data.length > 40) {
+        chartH.series[0].addPoint([x, z], true, true, true);
+      } else {
+        chartH.series[0].addPoint([x, z], true, false, true);
+      }
+      */
+      x=null;y=null;z=null;
+      str = null;
+      str_split = null;
+      Temp = null;
+      Humid = null;
+      Current = null;
+    }
+  };
+  xmlhttp2.open("GET",url,true);
+  xmlhttp2.send(null);   
+}, 10000 ) ;
+
+//var chartH = new Highcharts.Chart({
+//  chart:{ renderTo:'chart-humidity' },
+//  title: { text: 'ความชื้น' },
+//  series: [{
+//    showInLegend: false,
+//    data: []
+//  }],
+//  plotOptions: {
+//    line: { animation: false,
+//      dataLabels: { enabled: true }
+//    }
+//  },
+//  xAxis: {
+//    type: 'datetime',
+//    dateTimeLabelFormats: { second: '%H:%M:%S' }
+//  },
+//  yAxis: {
+//    title: { text: 'ความชื้น (%)' }
+//  },
+//  credits: { enabled: false }
+//});
+
+
+//setInterval(function ( ) {
+//  var Humid;
+//  var url="https://docs.google.com/spreadsheets/d/e/2PACX-1vT9vt0IBAkyuTBpOxWrUaHru2JvwkthSuZaYRPMFHoliPgLGS0m5qQ2m5-EuMKAbWr2Y2MUJZg_JlX-/pub?output=csv";
+//  var xmlhttp3=new XMLHttpRequest();
+//  xmlhttp3.onreadystatechange = function() {
+//    if(xmlhttp3.readyState == 4 && xmlhttp3.status==200){
+//      var str = xmlhttp3.responseText;
+//      var str_split = str.split(',');
+//      Humid = str[0];
+//      var x = (new Date()).getTime(),
+//          y = parseFloat(Humid);
+      //console.log(this.responseText);
+//      if(chartH.series[0].data.length > 40) {
+//        chartH.series[0].addPoint([x, y], true, true, true);
+//      } else {
+//        chartH.series[0].addPoint([x, y], true, false, true);
+//      }
+//      str = null;
+//      str_split = null;
+//      Humid = null;
+//      delete str;
+//      delete str_split;
+//      delete Humid;
+//    }
+//  };
+//  xmlhttp3.open("GET",url,true);
+//  xmlhttp3.send(null);    
+//}, 10000 ) ;
+
+</script>
+</html>
