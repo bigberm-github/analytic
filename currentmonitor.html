@@ -30,7 +30,9 @@ copies or substantial portions of the Software. -->
     }
   </style>
 </head>
-
+ <script> 
+   var test = 2;
+  </script>
     <script type="text/javascript">
         var mqtt1;
         var mqtt2;
@@ -291,7 +293,8 @@ setInterval(function ( ) {
           //Humid = str_split[0];
           //Temp = str_split[1];
   //	  Current = str;
-          Current = PayLoad;
+          //Current = PayLoad;
+          Current = test;
           var x = (new Date()).getTime(),
           //y = parseFloat(Temp),z = parseFloat(Humid);
           y = parseFloat(Current);
