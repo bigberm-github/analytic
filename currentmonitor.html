@@ -28,22 +28,11 @@ copies or substantial portions of the Software. -->
     }
   </style>
 </head>
-<body>
-    <!--<button type="button" onclick="loadData()">Load Spreadsheet Data</button>-->
-    <div id="display1"></div>
-    <!--<div id="display2"></div>-->
-    <h2>แสดงการทำงานของอุปกรณ์</h2>
-    <h3>อัพเดตเรียลไทม์ทุก 10 วินาที</h3>
-    <!--<div id="chart-temperature" class="container"></div>
-    <div id="chart-humidity" class="container"></div>--> 
-    <div id="chart-current" class="container"></div>
-</body>
-
 <script src="mqtt/mqttws31.js" type="text/javascript"></script>
-<script src="mqtt/jquery.min.js" type="text/javascript"></script>
-<script src="mqtt/config.js" type="text/javascript"></script>
+    <script src="mqtt/jquery.min.js" type="text/javascript"></script>
+    <script src="mqtt/config.js" type="text/javascript"></script>
 
-<script type="text/javascript">
+    <script type="text/javascript">
         var mqtt1;
         var mqtt2;
         var mqtt3;
@@ -227,6 +216,39 @@ copies or substantial portions of the Software. -->
         $(document).ready(function () {
             MQTTconnect3();
         });
+</script>
+<body>
+    <!--
+    <button type="button" onclick="loadData()">Load Spreadsheet Data</button>
+    <div id="display1"></div>
+    <!--<div id="display2"></div>-->
+    -->
+    <h2>แสดงการทำงานของอุปกรณ์</h2>
+    <h3>อัพเดตเรียลไทม์ทุก 10 วินาที</h3>
+    <!--<div id="chart-temperature" class="container"></div>
+    <div id="chart-humidity" class="container"></div>--> 
+    <div id="chart-current" class="container"></div>
+</body>
+<script>
+function loadData() {
+  var url="https://docs.google.com/spreadsheets/d/e/2PACX-1vT_xuM3jkiTgpcmCGqqnIrprKZkWGXAxQjGtvgF_3VtByUhaGgQenXnJj4S5oQAb4uLHvwqD5NQHIu7/pub?output=csv";
+  var xmlhttp1=new XMLHttpRequest();
+  xmlhttp1.onreadystatechange = function() {
+    if(xmlhttp1.readyState == 4 && xmlhttp1.status==200){
+      //document.getElementById("display").innerHTML = xmlhttp1.responseText;
+      //var str = xmlhttp1.responseText.split(',');
+      //humid = str[0];
+      //temp = str[1];
+      var str = xmlhttp1.responseText;
+      current = str;
+      //document.getElementById("display1").innerHTML = humid;
+      //document.getElementById("display2").innerHTML = temp;
+      document.getElementById("display1").innerHTML = current;
+    }
+  };
+  xmlhttp1.open("GET",url,true);
+  xmlhttp1.send(null);
+}
 
 Highcharts.setOptions({
     global: {
@@ -264,8 +286,31 @@ var chartT = new Highcharts.Chart({
   credits: { enabled: false }
 });
 
+/*
+var chartH = new Highcharts.Chart({
+  chart:{ renderTo:'chart-humidity' },
+  title: { text: 'ความชื้น' },
+  series: [{
+    showInLegend: false,
+    data: []
+  }],
+  plotOptions: {
+    line: { animation: false,
+      dataLabels: { enabled: true }
+    }
+  },
+  xAxis: {
+    type: 'datetime',
+    dateTimeLabelFormats: { second: '%H:%M:%S' }
+  },
+  yAxis: {
+    title: { text: 'ความชื้น (%)' }
+  },
+  credits: { enabled: false }
+});
+*/
+
 setInterval(function ( ) {
-  
   //var Temp;
   //var Humid;
   var Current;
@@ -273,21 +318,17 @@ setInterval(function ( ) {
   //var xmlhttp2=null;
   //xmlhttp2=new XMLHttpRequest();
   //xmlhttp2.onreadystatechange = function() {
-    //if(xmlhttp2.readyState == 4 && xmlhttp2.status==200){
-          //var str = xmlhttp2.responseText;
+  //  if(xmlhttp2.readyState == 4 && xmlhttp2.status==200){
+  //        var str = xmlhttp2.responseText;
           //var str_split = str.split(',');
           //Humid = str_split[0];
           //Temp = str_split[1];
-	  //Current = str;
-          
+  //	  Current = str;
           Current = PayLoad;
           var x = (new Date()).getTime(),
-          
           //y = parseFloat(Temp),z = parseFloat(Humid);
-          
           y = parseFloat(Current);
-      	  
-          //console.log(xmlhttp2.responseText);
+      	 //console.log(xmlhttp2.responseText);
             
       if(chartT.series[0].data.length > 40) {
         chartT.series[0].addPoint([x, y], true, true, true);
@@ -301,17 +342,13 @@ setInterval(function ( ) {
         chartH.series[0].addPoint([x, z], true, false, true);
       }
       */
-
       x=null;y=null;z=null;
-     
       //str = null;
       //str_split = null;
       //Temp = null;
       //Humid = null;
-     
       Current = null;
-    
-      //}
+    //}
   //};
   //xmlhttp2.open("GET",url,true);
   //xmlhttp2.send(null);   
