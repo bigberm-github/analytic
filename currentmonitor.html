@@ -36,16 +36,16 @@ copies or substantial portions of the Software. -->
         var mqtt2;
         var mqtt3;
         var reconnectTimeout = 2000;
-        host3 = 'broker.hivemq.com';
-port3 = 8000;
-topic = 'esp32/test'; 	// topic to subscribe to
-topic2 = 'esp32/power'; 	// topic to subscribe to
-topic3 = 'esp32/humid'; 	// topic to subscribe to
-useTLS = false;
-username = null;
-password = null;
-PayLoad = "";
-cleansession = true;
+        var host3 = 'broker.hivemq.com';
+        var port3 = 8000;
+        var topic = 'esp32/test'; 	// topic to subscribe to
+        var topic2 = 'esp32/power'; 	// topic to subscribe to
+        var topic3 = 'esp32/humid'; 	// topic to subscribe to
+        var useTLS = false;
+        var username = null;
+        var password = null;
+        var PayLoad = "";
+        var cleansession = true;
       
         function MQTTconnect1() {
             if (typeof path == "undefined") {
