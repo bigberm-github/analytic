@@ -214,6 +214,7 @@ copies or substantial portions of the Software. -->
             var topic = message.destinationName;
             var payload = message.payloadString;
             PayLoad = payload;
+            retData(payload);
             $('#ws3').prepend('<li>' + topic + ' = ' + payload + '</li>');
         };
 
@@ -312,11 +313,16 @@ var chartH = new Highcharts.Chart({
   credits: { enabled: false }
 });
 */
-
+var ret;
+function retData(response) {
+            ret = response;
+            return ret;
+};
+  
 setInterval(function ( ) {
   //var Temp;
   //var Humid;
-  MQTTconnect3();
+  //MQTTconnect3();
   var Current;
   //var url="https://docs.google.com/spreadsheets/d/e/2PACX-1vT_xuM3jkiTgpcmCGqqnIrprKZkWGXAxQjGtvgF_3VtByUhaGgQenXnJj4S5oQAb4uLHvwqD5NQHIu7/pub?output=csv";
   //var xmlhttp2=null;
@@ -328,7 +334,7 @@ setInterval(function ( ) {
           //Humid = str_split[0];
           //Temp = str_split[1];
   //	  Current = str;
-          Current = PayLoad;
+          Current = ret;
           var x = (new Date()).getTime(),
           //y = parseFloat(Temp),z = parseFloat(Humid);
           y = parseFloat(Current);
