@@ -31,13 +31,7 @@ copies or substantial portions of the Software. -->
   </style>
 </head>
  <script> 
-   var test = 2;
-  </script>
-    <script type="text/javascript">
-        var mqtt1;
-        var mqtt2;
-        var mqtt3;
-        var reconnectTimeout = 2000;
+   var reconnectTimeout = 2000;
         var host3 = 'broker.hivemq.com';
         var port3 = 8000;
         var topic = 'esp32/test'; 	// topic to subscribe to
@@ -48,7 +42,13 @@ copies or substantial portions of the Software. -->
         var password = null;
         var PayLoad = "";
         var cleansession = true;
-      
+   var PayLoad = "";
+  </script>
+    <script type="text/javascript">
+        var mqtt1;
+        var mqtt2;
+        var mqtt3;
+              
         function MQTTconnect1() {
             if (typeof path == "undefined") {
                 path = '/mqtt';
@@ -293,8 +293,8 @@ setInterval(function ( ) {
           //Humid = str_split[0];
           //Temp = str_split[1];
   //	  Current = str;
-          //Current = PayLoad;
-          Current = test;
+          Current = PayLoad;
+          //Current = test;
           var x = (new Date()).getTime(),
           //y = parseFloat(Temp),z = parseFloat(Humid);
           y = parseFloat(Current);
