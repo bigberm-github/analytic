@@ -64,7 +64,7 @@ copies or substantial portions of the Software. -->
                 cleanSession: cleansession,
                 onSuccess: onConnect3,
                 onFailure: function (message) {
-                    $('#status3').val("Connection failed: " + message.errorMessage + "Retrying");
+                    //$('#status3').val("Connection failed: " + message.errorMessage + "Retrying");
                     setTimeout(MQTTconnect3, reconnectTimeout);
                 }
             };
@@ -81,17 +81,17 @@ copies or substantial portions of the Software. -->
         }
 
         function onConnect3() {
-            $('#status3').val('Connected to ' + host3 + ':' + port3 + path);
+            //$('#status3').val('Connected to ' + host3 + ':' + port3 + path);
             // Connection succeeded; subscribe to our topic
             mqtt3.subscribe(topic, { qos: 0 });
             mqtt3.subscribe(topic2, { qos: 0 });
             mqtt3.subscribe(topic3, { qos: 0 });
-            $('#topic3').val(topic2);
+            //$('#topic3').val(topic2);
         }
 
         function onConnectionLost3(response) {
             setTimeout(MQTTconnect3, reconnectTimeout);
-            $('#status3').val("connection lost: " + responseObject.errorMessage + ". Reconnecting");
+            //$('#status3').val("connection lost: " + responseObject.errorMessage + ". Reconnecting");
 
         };
 
@@ -99,12 +99,12 @@ copies or substantial portions of the Software. -->
             var topic = message.destinationName;
             var payload = message.payloadString;
             PayLoad = payload;
-            $('#ws3').prepend('<li>' + topic + ' = ' + payload + '</li>');
+            //$('#ws3').prepend('<li>' + topic + ' = ' + payload + '</li>');
         };
 
-        $(document).ready(function () {
-            MQTTconnect3();
-        });     
+        //$(document).ready(function () {
+        //    MQTTconnect3();
+        //});     
 </script>
   
 <body>
