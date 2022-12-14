@@ -224,9 +224,24 @@ copies or substantial portions of the Software. -->
 
         $(document).ready(function () {
             MQTTconnect3();
-        });
-      
-      Highcharts.setOptions({
+        });     
+</script>
+  
+<body>
+    <!--
+    <button type="button" onclick="loadData()">Load Spreadsheet Data</button>
+    <div id="display1"></div>-->
+    <!--<div id="display2"></div>-->
+    <h2>แสดงการทำงานของอุปกรณ์</h2>
+    <h3>อัพเดตเรียลไทม์ทุก 10 วินาที</h3>
+    <!--<div id="chart-temperature" class="container"></div>
+    <div id="chart-humidity" class="container"></div>--> 
+    <div id="chart-current" class="container"></div>
+</body> 
+
+<script type="text/javascript">
+  
+   Highcharts.setOptions({
     global: {
         useUTC: false
     }
@@ -305,17 +320,5 @@ setInterval(function ( ) {
   //xmlhttp2.open("GET",url,true);
   //xmlhttp2.send(null);   
 }, 10000 ) ;
-      
-</script>
-<body>
-    <!--
-    <button type="button" onclick="loadData()">Load Spreadsheet Data</button>
-    <div id="display1"></div>-->
-    <!--<div id="display2"></div>-->
-    <h2>แสดงการทำงานของอุปกรณ์</h2>
-    <h3>อัพเดตเรียลไทม์ทุก 10 วินาที</h3>
-    <!--<div id="chart-temperature" class="container"></div>
-    <div id="chart-humidity" class="container"></div>--> 
-    <div id="chart-current" class="container"></div>
-</body> 
+  </script>
 </html>
